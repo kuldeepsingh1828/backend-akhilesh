@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to <%= title %>
+  </p>
+  <% if (userData.length){%>
+    <table>
+      <tr>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+      <% userData.forEach(function(user){ %>
+        <tr id="user">
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <%= user.password %>
+          </td>
+        </tr>
+        <% }); %>
+    </table>
+    <% }else{%>
+      <h2>No User Dta</h2>
+      <% } %>
+</body>
+
 </html>
