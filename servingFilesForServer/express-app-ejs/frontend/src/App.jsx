@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { addUser, getUsers } from './endpoints/users'
+import UploadImage from './UploadImage';
 function App() {
 
   const [users, setUsers] = useState([]);
@@ -23,7 +24,8 @@ function App() {
 
   return (
     <>
-      <button onClick={getAllUsers}>Say Hi to Backend</button>
+      <UploadImage />
+      {/* <button onClick={getAllUsers}>Say Hi to Backend</button>
       <div style={{
         height: '200px',
         overflow: 'scroll'
@@ -45,7 +47,7 @@ function App() {
         Male<input type={"radio"} name='gender' value={"male"} onChange={(e) => { handleUser(e) }} />
         Female<input type={"radio"} name='gender' value={"female"} onChange={(e) => { handleUser(e) }} />
         <button type='button' onClick={handleUserAdd}>Add User</button>
-      </form>
+      </form> */}
     </>
   )
 }

@@ -39,9 +39,7 @@ router.get('/upload', function (req, res, next) {
 
 router.post('/upload', upload.array('image', 4), function (req, res, next) {
   console.log(req.files);
-  res.end("DONE");
-  //Image is coming in post method
-  //save image in drive
+  res.json({ message: 'success', text: `${req.files.length} File(s) saved Successfully` })
 })
 
 module.exports = router;
