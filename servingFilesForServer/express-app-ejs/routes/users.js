@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var userModel = require('../connection/userModel');
 
 const users = [
   {
@@ -16,14 +17,28 @@ const users = [
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.json({ users });
+  userModel.find({ age: { $gt: 35 } }).then((data) => {
+    console.log(data);
+    res.json({ users: data });
+  }).catch((err) => {
+    console.log(err);
+    res.status(400).json({ msg: 'Error is there...' });
+  });
   // res.status(400).json({ msg: 'Error is there...' });
 });
 
 router.post('/add', function (req, res, next) {
-  users.push(req.body.user);
+  let newuser = req.body.user;
+  users.push(newuser);
   console.log(users);
-  res.json({ msg: 'User Added Successfully' });
+
+  userModel.create(newuser).then((data) => {
+    console.log(data);
+    res.json({ msg: 'User added successfully' });
+  }).catch((err) => {
+    console.log(err);
+    res.status(400).json({ msg: 'Error is there...' });
+  });
 });
 
 module.exports = router;
