@@ -17,7 +17,7 @@ const users = [
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  userModel.find({ age: { $gt: 35 } }).then((data) => {
+  userModel.find({}).then((data) => {
     console.log(data);
     res.json({ users: data });
   }).catch((err) => {
@@ -41,4 +41,30 @@ router.post('/add', function (req, res, next) {
   });
 });
 
+
+router.delete('/delete/:id', function (req, res, next) {
+  let id = req.params.id;
+  console.log(id);
+  userModel.deleteOne({ _id: id }).then((data) => {
+    console.log(data);
+    res.json({ msg: 'User deleted successfully' });
+  }).catch((err) => {
+    console.log(err);
+    res.status(400).json({ msg: 'Error is there...' });
+  });
+});
+
+router.put('/update/:id', function (req, res, next) {
+  let id = req.params.id;
+  let user = req.body.user;
+  delete user._id;
+  console.log(id);
+  userModel.updateOne({ _id: id }, { $set: { ...user } }).then((data) => {
+    console.log(data);
+    res.json({ msg: 'User updated successfully' });
+  }).catch((err) => {
+    console.log(err);
+    res.status(400).json({ msg: 'Error is there...' });
+  });
+});
 module.exports = router;

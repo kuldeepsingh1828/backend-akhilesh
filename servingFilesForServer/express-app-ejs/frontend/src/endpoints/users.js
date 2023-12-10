@@ -10,5 +10,14 @@ export const getUsers = async () => {
 export const addUser = async (user) => {
     let response = await axios.post(`${BASE_URL}/users/add`, { user });
     return await response.data;
+}
 
+export const deleteUser = async (id) => {
+    let response = await axios.delete(`${BASE_URL}/users/delete/${id}`);
+    return await response.data;
+}
+
+export const updateUser = async (user) => {
+    let response = await axios.put(`${BASE_URL}/users/update/${user._id}`, { user });
+    return await response.data;
 }
